@@ -111,8 +111,7 @@ public class MyGildedRoseRefactoredTest {
 	private static GildedRose createGildedRoseWithOneItem(String itemType, int sellIn, int quality) {
 		Item item = new Item(itemType, sellIn, quality);
 		Item[] items = new Item[] { item };
-		GildedRose app = new GildedRose(items);
-		return app;
+		return new GildedRose(items);
 	}
 
 	private static void assertItem(Item expected, Item actual) {
