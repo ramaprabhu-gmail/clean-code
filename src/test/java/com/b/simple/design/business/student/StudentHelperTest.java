@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class StudentHelperTest {
 
-	StudentHelper helper = new StudentHelper();
+	MyStudentHelperRefactored helper = new MyStudentHelperRefactored();
 	
 	@Test
 	public void testIsGradeB() {
