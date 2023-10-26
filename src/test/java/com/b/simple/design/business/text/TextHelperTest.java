@@ -9,7 +9,7 @@ import com.b.simple.design.business.text.TextHelper;
 
 public class TextHelperTest {
 
-	TextHelper helper = new TextHelper();
+	MyTextHelperRefactored helper = new MyTextHelperRefactored();
 	
 	@Test
 	@Disabled
