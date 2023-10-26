@@ -1,11 +1,13 @@
 package com.c.refactoring.movie;
 
 import com.c.refactoring.StringUtils;
-import com.sun.tools.javac.util.List;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Movie {
 
-    public static final List<String> VALID_B_RATINGS = List.of("B1", "B2", "B3", "B4");
+    public static final List<String> VALID_B_RATINGS = Arrays.asList("B1", "B2", "B3", "B4");
     String rating;
 
     public Movie(String rating) {
