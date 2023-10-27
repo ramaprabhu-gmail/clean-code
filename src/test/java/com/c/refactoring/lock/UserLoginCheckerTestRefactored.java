@@ -11,8 +11,7 @@ import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 public class UserLoginCheckerTestRefactored {
-	private static final String SOME_STATUS = "NOT_USED";
-	private static final int SOME_ID = 10;
+
 	private static final boolean IS_FIRST_SCREEN_TRUE = true;
 	private static final boolean IS_FIRST_SCREEN_FALSE = false;
 	UserLoginChecker userLoginChecker = new UserLoginChecker();
@@ -21,7 +20,7 @@ public class UserLoginCheckerTestRefactored {
 	public void testisUserAllowedToLogin_DifferentUserTriesImmediatelyAfter() {
 		Object[] existingLocks = new Object[] { "TEST_USER_ID_1", new Date() };
 
-		Lock lock = userLoginChecker.isUserAllowedToLogin(SOME_ID, SOME_STATUS, 
+		Lock lock = userLoginChecker.isUserAllowedToLogin( 
 				IS_FIRST_SCREEN_TRUE, new User("TEST_USER_ID_2"), Arrays
 				.asList(new Object[][] { existingLocks }));
 
@@ -32,7 +31,7 @@ public class UserLoginCheckerTestRefactored {
 	public void testisUserAllowedToLogin_SameUserReturnsToFirstScreen() {
 		Object[] existingLocks = new Object[] { "TEST_USER_ID", new Date() };
 
-		Lock lock = userLoginChecker.isUserAllowedToLogin(SOME_ID, SOME_STATUS, 
+		Lock lock = userLoginChecker.isUserAllowedToLogin( 
 				IS_FIRST_SCREEN_TRUE, new User("TEST_USER_ID"), Arrays
 				.asList(new Object[][] { existingLocks }));
 
@@ -43,7 +42,7 @@ public class UserLoginCheckerTestRefactored {
 	public void testisUserAllowedToLogin_SameUserReturnsToSecondScreen() {
 		Object[] existingLocks = new Object[] { "TEST_USER_ID", new Date() };
 
-		Lock lock = userLoginChecker.isUserAllowedToLogin(SOME_ID, SOME_STATUS, 
+		Lock lock = userLoginChecker.isUserAllowedToLogin( 
 				IS_FIRST_SCREEN_FALSE, new User("TEST_USER_ID"), Arrays
 				.asList(new Object[][] { existingLocks }));
 
@@ -54,7 +53,7 @@ public class UserLoginCheckerTestRefactored {
 	public void testisUserAllowedToLogin_User2TriesToLoginToFirstScreen3hoursAfterUser1() {
 		Object[] existingLocks = new Object[] { "TEST_USER_ID_1", threeHoursBefore() };
 
-		Lock lock = userLoginChecker.isUserAllowedToLogin(SOME_ID, SOME_STATUS, 
+		Lock lock = userLoginChecker.isUserAllowedToLogin( 
 				IS_FIRST_SCREEN_TRUE, new User("TEST_USER_ID_2"), Arrays
 				.asList(new Object[][] { existingLocks }));
 
@@ -66,7 +65,7 @@ public class UserLoginCheckerTestRefactored {
 	public void testisUserAllowedToLogin_User2TriesToLoginToSecondScreen3hoursAfterUser1() {
 		Object[] existingLocks = new Object[] { "TEST_USER_ID_1", threeHoursBefore() };
 
-		Lock lock = userLoginChecker.isUserAllowedToLogin(SOME_ID, SOME_STATUS, 
+		Lock lock = userLoginChecker.isUserAllowedToLogin( 
 				IS_FIRST_SCREEN_FALSE, new User("TEST_USER_ID_2"), Arrays
 				.asList(new Object[][] { existingLocks }));
 

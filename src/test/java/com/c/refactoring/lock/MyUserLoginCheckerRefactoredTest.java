@@ -8,8 +8,6 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MyUserLoginCheckerRefactoredTest {
-    public static final int SOME_ID = 10;
-    public static final String SOME_STATUS = "NOT_USED";
     public static final boolean IS_FIRST_SCREEN_TRUE = true;
     public static final boolean IS_FIRST_SCREEN_FALSE = false;
     UserLoginChecker userLoginChecker = new UserLoginChecker();
@@ -17,7 +15,7 @@ public class MyUserLoginCheckerRefactoredTest {
     @Test
     public void testisUserAllowedToLogin_DifferentUserTriesImmediatelyAfter() {
         Object[] existingLocks = new Object[] { "TEST_USER_ID_1", new Date() };
-        Lock lock = userLoginChecker.isUserAllowedToLogin(SOME_ID, SOME_STATUS, IS_FIRST_SCREEN_TRUE,
+        Lock lock = userLoginChecker.isUserAllowedToLogin(IS_FIRST_SCREEN_TRUE,
                 new User("TEST_USER_ID_2"), Arrays.asList(new Object[][] { existingLocks }));
         assertReadAccess(lock);
     }
@@ -25,7 +23,7 @@ public class MyUserLoginCheckerRefactoredTest {
     @Test
     public void testisUserAllowedToLogin_SameUserReturnsToFirstScreen() {
         Object[] existingLocks = new Object[] { "TEST_USER_ID", new Date() };
-        Lock lock = userLoginChecker.isUserAllowedToLogin(SOME_ID, SOME_STATUS, IS_FIRST_SCREEN_TRUE,
+        Lock lock = userLoginChecker.isUserAllowedToLogin(IS_FIRST_SCREEN_TRUE,
                 new User("TEST_USER_ID"), Arrays.asList(new Object[][] { existingLocks }));
         assertWriteAccess(lock);
     }
@@ -33,7 +31,7 @@ public class MyUserLoginCheckerRefactoredTest {
     @Test
     public void testisUserAllowedToLogin_SameUserReturnsToSecondScreen() {
         Object[] existingLocks = new Object[] { "TEST_USER_ID", new Date() };
-        Lock lock = userLoginChecker.isUserAllowedToLogin(SOME_ID, SOME_STATUS, IS_FIRST_SCREEN_FALSE,
+        Lock lock = userLoginChecker.isUserAllowedToLogin(IS_FIRST_SCREEN_FALSE,
                 new User("TEST_USER_ID"), Arrays.asList(new Object[][] { existingLocks }));
         assertWriteAccess(lock);
     }
@@ -41,7 +39,7 @@ public class MyUserLoginCheckerRefactoredTest {
     @Test
     public void testisUserAllowedToLogin_User2TriesToLoginToFirstScreen3hoursAfterUser1() {
         Object[] existingLocks = new Object[] { "TEST_USER_ID_1", threeHoursBefore() };
-        Lock lock = userLoginChecker.isUserAllowedToLogin(SOME_ID, SOME_STATUS, IS_FIRST_SCREEN_TRUE,
+        Lock lock = userLoginChecker.isUserAllowedToLogin(IS_FIRST_SCREEN_TRUE,
                 new User("TEST_USER_ID_2"), Arrays.asList(new Object[][] { existingLocks }));
         assertWriteAccess(lock);
     }
@@ -49,7 +47,7 @@ public class MyUserLoginCheckerRefactoredTest {
     @Test
     public void testisUserAllowedToLogin_User2TriesToLoginToSecondScreen3hoursAfterUser1() {
         Object[] existingLocks = new Object[] { "TEST_USER_ID_1", threeHoursBefore() };
-        Lock lock = userLoginChecker.isUserAllowedToLogin(SOME_ID, SOME_STATUS, IS_FIRST_SCREEN_FALSE,
+        Lock lock = userLoginChecker.isUserAllowedToLogin(IS_FIRST_SCREEN_FALSE,
                 new User("TEST_USER_ID_2"), Arrays.asList(new Object[][] { existingLocks }));
         assertReadAccess(lock);
     }
